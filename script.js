@@ -1,10 +1,10 @@
-function GetTweet(url){
-    const Http = new XMLHttpRequest();
-    Http.open("GET", 'https://publish.twitter.com/oembed?%20url='+url);
-    Http.send();
+function GetTweet(url, key, secret){
 
-    Http.onreadystatechange = (e) => {
-        console.log(Http.responseText)
+    const http = new XMLHttpRequest();
+    http.open("GET", 'https://publish.twitter.com/oembed?%20url='+url);
+    http.send();
+    http.onreadystatechange = (e) => {
+        console.log(http.responseText)
     }
 }
 
