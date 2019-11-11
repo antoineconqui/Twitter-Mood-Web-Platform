@@ -26,7 +26,10 @@
                         <legend>Evaluation du tweet:</legend>
                         <label for="mood">Mood</label>
                         <input type="range" id="mood" name="mood" min="0" max="10">
-                        <input type="submit" value="Envoyer">
+                        <input type="submit" value="Envoyer"></br>
+                        <label for="nom critere">Nom</label>
+                        <input type="range" id="nomc" name="nomc" min="0" max="10">
+                        <input type="submit" value="Envoyer"></br>
                     </fieldset>
                 </form>
             </div>
