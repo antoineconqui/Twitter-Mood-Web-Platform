@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <h1>Twitter Mood Platform</h1>
+    <h1>Twitter Mood Platform 2</h1>
 
     <div class="container">
         <div class="row">
