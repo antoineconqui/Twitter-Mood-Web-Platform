@@ -17,27 +17,29 @@
     <!-- Barre de navigation -->
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <div class="navbar-header">
+        <div class="navbar-header col-md-2">
           <a class="navbar-brand" href="#">Twitter Mood Platform</a>
         </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Acceuil</a></li>
+        <ul class="nav navbar-nav col-md-8">
+          <li class="active"><a href="#">Acceuil</a></li>
           <li><a href="#">Projet</a></li>
+
         </ul>
+        <div class="topnav col-md-2">
+            <?php
+                    include 'get_compteur.php';
+                ?>
+        </div>
       </div>
     </nav>
-
-    <!-- Barre de recherche -->
-    <div class="topnav">
-      <input type="text" placeholder="Search..">
-    </div>
+    
 
     <!-- Tweet + Explication du projet -->
 
     <div class="container">
         <div class="row">
             <div class="col-md-8" id="tweet">
+                <h1> TROUVEZ-VOUS CE TWEET PLUTOT JOYEUX OU DEPRESSIF ?</h1>
                 <?php
                     include 'get_tweet.php';
                 ?>
@@ -56,11 +58,19 @@
 
 
             <div class="col-md-4" id="evaluation">
-
-
-                
-
-
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                        <td>Explication du projet : 
+                            Dans le cadre d’un projet pédagogique, nous traitons les thématiques de dépression. Notre but faire un algorithme capable de détecter les symptômes de la dépression chez les utilisateurs de twitter à travers leur activité selon des critères mesurables: analyse des tweets, “j’aime”, personnes suivies.
+                        
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>Nombre de Tweet évalues</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
