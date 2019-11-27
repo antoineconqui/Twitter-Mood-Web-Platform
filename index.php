@@ -11,7 +11,19 @@
 </head>
 <body>
 
-    <h1>Twitter Mood Platform 2</h1>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Twitter Mood Platform 2</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Page 1</a></li>
+          <li><a href="#">Page 2</a></li>
+          <li><a href="#">Page 3</a></li>
+        </ul>
+      </div>
+    </nav>
 
     <div class="container">
         <div class="row">
@@ -21,6 +33,8 @@
                 ?>
             </div>
             <div class="col-md-6" id="evaluation">
+
+
                 <form action="/action_page.php">
                     <fieldset>
                         <legend>Evaluation du tweet:</legend>
@@ -32,6 +46,8 @@
                         <input type="submit" value="Envoyer"></br>
                     </fieldset>
                 </form>
+
+
             </div>
         </div>
     </div>
