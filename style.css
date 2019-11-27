@@ -1,3 +1,24 @@
 h1{
     text-align: center;
+    color: black;
+    border: 2px solid black;
+    text-shadow: black;
+}
+
+body
+{
+	background-color: #dfe6e9;
+}
+nav
+{
+	background-color: #74b9ff;
+	text-align: center;
+    color: white;
+}
+
+p
+{
+	text-align: center
+	color: black;
+	text-shadow: black ;
 }
