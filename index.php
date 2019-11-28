@@ -10,27 +10,37 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <!-- Logo -->
-    <image = />
+    
+    <div class="container" id="header">
+      <div class="row">
 
+      <div class="col-md-2">
+        <img src="./files/twitter_mood_icon.png" alt="Icon Twitter Mood" class="logo">
+      </div>
+      <div class="col-md-10">
+        <div class="row">
+          <nav class="navbar">
+            <div class="navbar-header col-md-5">
+              <a class="navbar-brand title" href="index.php">Twitter Mood Platform</a>
+            </div>
+            <ul class="nav navbar-nav col-md-3">
+              <li><a href="index.php">Acceuil</a></li>
+              <li><a href="projet.html">Projet</a></li>
 
-    <!-- Barre de navigation -->
-    <nav class="navbar">
-      <div class="container-fluid">
-        <div class="navbar-header col-md-2">
-          <a class="navbar-brand" href="#">Twitter Mood Platform</a>
+            </ul>
+            <div class="topnav col-md-4">
+                <p>Nombre de tweets</p>
+                <?php include 'get_compteur.php'; ?>
+            </div>
+          </nav>
         </div>
-        <ul class="nav navbar-nav col-md-8">
-          <li><a href="index.php">Acceuil</a></li>
-          <li><a href="projet.html">Projet</a></li>
-
-        </ul>
-        <div class="topnav col-md-2">
-            <p>Nombre de tweets</p>
-            <?php include 'get_compteur.php'; ?>
+        <div class="row">
+          <h1> TROUVEZ-VOUS CE TWEET PLUTOT JOYEUX OU DEPRESSIF ?</h1>
         </div>
       </div>
-    </nav>
+      </div>
+
+    </div>
     
 
     <!-- Tweet + Explication du projet -->
@@ -38,7 +48,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8" id="tweet">
-                <h1> TROUVEZ-VOUS CE TWEET PLUTOT JOYEUX OU DEPRESSIF ?</h1>
                 <?php
                     include 'get_tweet.php';
                 ?>
