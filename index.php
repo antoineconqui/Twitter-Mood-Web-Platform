@@ -66,6 +66,9 @@
                         <label for="nom critere">Nom</label>
                         <input type="range" id="nomc" name="nomc" min="0" max="10">
                         <input type="submit" value="Envoyer"></br>
+                        <label for="nom critere bis">Nom</label>
+                        <input type="range" id="nombis" name="nombis" min="0" max="10">
+                        <input type="submit" value="Envoyer"></br>
                     </fieldset>
             </form>
             </div>
