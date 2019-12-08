@@ -60,14 +60,8 @@
             <form action="/action_page.php">
                     <fieldset>
                         <legend>Evaluation du tweet:</legend>
-                        <label for="mood">Mood</label>
-                        <input type="range" id="mood" name="mood" min="0" max="10">
-                        <input type="submit" value="Envoyer"></br>
-                        <label for="nom critere">Nom</label>
-                        <input type="range" id="nomc" name="nomc" min="0" max="10">
-                        <input type="submit" value="Envoyer"></br>
-                        <label for="nom critere bis">Nom</label>
-                        <input type="range" id="nombis" name="nombis" min="0" max="10">
+                        <label for="note">Humeur du tweet (0 à 10)</label>
+                        <input type="range" id="note" name="note" min="0" max="10">
                         <input type="submit" value="Envoyer"></br>
                     </fieldset>
             </form>
