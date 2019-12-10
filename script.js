@@ -1,11 +1,49 @@
-function GetTweet(url, key, secret){
+function RetrieveTweet(token, search_word){
+    $.ajax({
+        url: 'https://api.twitter.com/1.1/search/tweets.json?q='+search_word+'&lang=fr&count=1&tweet_mode=extended',
+        headers: {
+            'Authorization': 'Bearer '+token,
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: function(data){
+            console.log('succes: '+json(data));
+        },
+        error: function(e){
+            console.log('error: ');
+        }
+    });
 
-    const http = new XMLHttpRequest();
-    http.open("GET", 'https://publish.twitter.com/oembed?%20url='+url);
-    http.send();
-    http.onreadystatechange = (e) => {
-        console.log(http.responseText)
-    }
+    
+    curl_setopt($br, CURLOPT_RETURNTRANSFER, true);
+    $data = json_decode(curl_exec($br));
+    curl_close($br);
 }
 
-GetTweet('https://twitter.com/elonmusk/status/1187490060746182656')
+RetrieveTweet(token,'depression');
+
+var db = firebase.firestore();
+
+function AddTweet(text,note){
+    db.collection("tweets").add({
+        text: text,
+        note: note,
+    })
+    .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
+}
+
+// function GetTweet(){
+//     db.collection("tweets").get().then((querySnapshot) => {
+//         querySnapshot.forEach((doc) => {
+//             console.log(`${doc.id} => ${doc.data()}`);
+//         });
+//     });
+// }
+
+// AddTweet('test',10);
+// GetTweet();

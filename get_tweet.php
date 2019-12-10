@@ -1,5 +1,4 @@
 <?php
-
     class Tweet{
         public $id;
         public $text;
@@ -15,22 +14,22 @@
             $data = json_decode(curl_exec($br));
             curl_close($br);
 
-            ?><script>console.log(<?php print json_encode($data);?>);</script><?php
-
             if(count($data->statuses)!=0){
                 $this->id = $data->statuses[0]->id;
                 $this->text = $data->statuses[0]->full_text;
                 $this->username = $data->statuses[0]->user->screen_name;
                 $this->url = 'https://twitter.com/'.$this->username.'/status/'.$this->id;
-                
                 $api_endpoint = 'https://publish.twitter.com/oembed?url='.$this->url.'';
                 $br = curl_init($api_endpoint);
                 curl_setopt($br, CURLOPT_HTTPHEADER, array('Authorization: Bearer '.$token->access_token));
                 curl_setopt($br, CURLOPT_RETURNTRANSFER, true);
                 $data = json_decode(curl_exec($br));
                 curl_close($br);
-                
                 $this->embedding = $data->html;
+                ?><script>
+                    var id = "<?php print $this->id;?>";
+                    var text = "<?php print $this->text;?>";
+                </script><?php
             }
             else{
                 $this->embedding = "<span> Erreur de connexion avec Twitter. Impossible de récupérer de tweets.</span>";
@@ -59,5 +58,4 @@
 
     $tweet = new Tweet($token, 'depression');
     $tweet->display();
-
 ?>
