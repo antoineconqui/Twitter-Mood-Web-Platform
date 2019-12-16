@@ -1,4 +1,5 @@
 <?php
+
     class Tweet{
         public $id;
         public $text;
@@ -6,38 +7,51 @@
         public $url;
         public $embedding;
 
-        public function __construct($token, $search_word){
-            $api_endpoint = 'https://api.twitter.com/1.1/search/tweets.json?q='.$search_word.'&lang=fr&count=1&tweet_mode=extended';
-            $br = curl_init($api_endpoint);
-            curl_setopt($br, CURLOPT_HTTPHEADER, array('Authorization: Bearer '.$token->access_token));
-            curl_setopt($br, CURLOPT_RETURNTRANSFER, true);
-            $data = json_decode(curl_exec($br));
-            curl_close($br);
+        public function __construct($id, $text, $username, $url, $embedding){
+            
+        }
 
-            if(count($data->statuses)!=0){
-                $this->id = $data->statuses[0]->id;
-                $this->text = $data->statuses[0]->full_text;
-                $this->username = $data->statuses[0]->user->screen_name;
-                $this->url = 'https://twitter.com/'.$this->username.'/status/'.$this->id;
-                $api_endpoint = 'https://publish.twitter.com/oembed?url='.$this->url.'';
+        public function display(){
+            print($this->embedding);
+        }
+    }
+
+    function getTweets($token, $search_word, $n){
+
+        $tweets = [];
+
+        $api_endpoint = 'https://api.twitter.com/1.1/search/tweets.json?q='.$search_word.'&lang=fr&count=1&tweet_mode=extended';
+        $br = curl_init($api_endpoint);
+        curl_setopt($br, CURLOPT_HTTPHEADER, array('Authorization: Bearer '.$token->access_token));
+        curl_setopt($br, CURLOPT_RETURNTRANSFER, true);
+        $data = json_decode(curl_exec($br));
+        curl_close($br);
+        $statuses = $data->statuses;
+        if(count($statuses)!=0){
+            for ($i=0; $i < count($statuses); $i++) { 
+                $id = $data->statuses[$i]->id;
+                $text = $data->statuses[$i]->full_text;
+                $username = $data->statuses[$i]->user->screen_name;
+                $url = 'https://twitter.com/'.$username.'/status/'.$id;
+                $api_endpoint = 'https://publish.twitter.com/oembed?url='.$url.'';
                 $br = curl_init($api_endpoint);
                 curl_setopt($br, CURLOPT_HTTPHEADER, array('Authorization: Bearer '.$token->access_token));
                 curl_setopt($br, CURLOPT_RETURNTRANSFER, true);
                 $data = json_decode(curl_exec($br));
                 curl_close($br);
-                $this->embedding = $data->html;
-                ?><script>
-                    var id = "<?php print $this->id;?>";
-                    var text = "<?php print $this->text;?>";
-                </script><?php
+                $embedding = $data->html;
+                $tweet = new Tweet($id, $text, $username, $url, $embedding);
+                array_push($tweets, $tweet);
             }
-            else{
-                $this->embedding = "<span> Erreur de connexion avec Twitter. Impossible de récupérer de tweets.</span>";
-            }
+            return $tweets;
+            ?><script>
+                // var id = "<?php print $this->id;?>";
+                // var text = "<?php print $this->text;?>";
+            </script><?php
         }
-
-        public function display(){
-            print($this->embedding);
+        else{
+            return null;
+            // $embedding = "<span> Erreur de connexion avec Twitter. Impossible de récupérer de tweets.</span>";
         }
     }
 
@@ -56,6 +70,8 @@
     $secret = 'JwAJY0unL8g3QRNBpqVL6Kpr1oNPgR45H9YCjyUfGU699zmVqw';
     $token = getBearerToken($key,$secret);
 
-    $tweet = new Tweet($token, 'depression');
+    $tweets = getTweets($token,'depression',10);
+
+    $tweet = $tweets[0];
     $tweet->display();
 ?>

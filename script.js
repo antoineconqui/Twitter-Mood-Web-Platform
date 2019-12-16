@@ -3,6 +3,7 @@ function RetrieveTweet(token, search_word){
         url: 'https://api.twitter.com/1.1/search/tweets.json?q='+search_word+'&lang=fr&count=1&tweet_mode=extended',
         headers: {
             'Authorization': 'Bearer '+token,
+            'Access-Control-Allow-Origin' : '*',
         },
         method: 'GET',
         dataType: 'json',
@@ -14,15 +15,16 @@ function RetrieveTweet(token, search_word){
         }
     });
 
-    
-    curl_setopt($br, CURLOPT_RETURNTRANSFER, true);
-    $data = json_decode(curl_exec($br));
-    curl_close($br);
+    // curl_setopt($br, CURLOPT_RETURNTRANSFER, true);
+    // $data = json_decode(curl_exec($br));
+    // curl_close($br);
 }
 
-RetrieveTweet(token,'depression');
+//RetrieveTweet(token,'depression');
 
 var db = firebase.firestore();
+
+console.log(id + ' - ' + text);
 
 function AddTweet(text,note){
     db.collection("tweets").add({

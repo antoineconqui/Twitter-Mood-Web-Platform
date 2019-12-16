@@ -1,5 +1,5 @@
 <?php 
-  require_once 'get_token.php';
+  //require_once 'get_token.php';
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +54,7 @@
     <div class="row">
       <div class="col-md-8" id="tweet">
         <?php
-          //include 'get_tweet.php';
+          include 'get_tweet.php';
         ?>
       </div>
       <div class="col-md-4" id="evaluation">
