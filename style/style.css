@@ -1,0 +1,143 @@
+:root {
+    --white: #ffffff;
+    --light: #b5e8fc;
+    --middle:#53caf9;
+    --dark:#078fc5;
+}
+
+body{
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+/* HEADER */
+
+#header{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+img{
+    width: 130px;
+    height: 130px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+
+h1{
+    font-size: 5em;
+}
+
+h2{
+    font-size: 2em;
+    padding: 5px;
+    border: 2px solid var(--dark);
+}
+
+/* BODY */
+
+twitter-widget{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#evaluation{
+    border: 1px solid var(--dark);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#evaluation button{
+    margin-top: 10px;
+}
+
+input {
+    position: absolute;
+    left: -9999px;
+}
+  
+label {
+    text-align: center;
+    width: 100%;
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    color: #fff;
+    background-color: var(--middle);
+    box-shadow: 0 0 20px var(--dark);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+input:checked + label, label:hover{
+    background-color: var(--dark);
+}
+
+input:disabled + label {
+    background-color: var(--light);
+}
+
+/* MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.modal-content h3{
+    font-size: xx-large;
+    text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 992px) {
+    h1{
+        font-size: 2.5em;
+    }
+    h2{
+        font-size: 1.5em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1{
+        font-size: 2em;
+        font-weight: bold;
+    }
+    h2{
+        font-size: 1.5em;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    h1{
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    h2{
+        font-size: 1em;
+    }
+    label{
+        font-size: small;
+    }
+}

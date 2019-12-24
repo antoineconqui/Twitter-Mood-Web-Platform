@@ -1,4 +1,5 @@
 <?php
+    
     function getBearerToken($key, $secret){
         $basic_credentials = base64_encode($key.':'.$secret);
         $tk = curl_init('https://api.twitter.com/oauth2/token');
@@ -10,11 +11,8 @@
         return $token->access_token;
     }
 
-    $key = '1BNsXIWrP251ZUxMLiuNcmU3z';
-    $secret = 'JwAJY0unL8g3QRNBpqVL6Kpr1oNPgR45H9YCjyUfGU699zmVqw';
+    $key = '5DF8l8MzD3imbUS7cGoBF2i7P';
+    $secret = 'qH0IbIuUBn9KeSNVjNN1ULrKWp210jHwBH7loVQNsmK09hOdkf';
     $token = getBearerToken($key,$secret);
-?>
 
-<script>
-    var token = "<?php print $token; ?>" ;
-</script>
+?>

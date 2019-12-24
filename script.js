@@ -1,51 +1,35 @@
-function RetrieveTweet(token, search_word){
-    $.ajax({
-        url: 'https://api.twitter.com/1.1/search/tweets.json?q='+search_word+'&lang=fr&count=1&tweet_mode=extended',
-        headers: {
-            'Authorization': 'Bearer '+token,
-            'Access-Control-Allow-Origin' : '*',
-        },
-        method: 'GET',
-        dataType: 'json',
-        success: function(data){
-            console.log('succes: '+json(data));
-        },
-        error: function(e){
-            console.log('error: ');
+var _tweet;
+NewTweet();
+
+db.collection('labelledTweets').doc('00000000').onSnapshot(function(document) {
+    $('#compteur').html('<b>'+document.data()['counter']+'</b> tweets analysés');
+});
+
+$('#neutre').change(()=>{
+    $('input[type=checkbox]').each(function () {
+        $(this).prop('disabled', $('#neutre').is(':checked'));
+        if($(this)[0].id!='neutre' && $('#neutre').is(':checked')){
+            $(this).prop('checked', false);
         }
     });
+    $('#neutre').prop('disabled',false);
+});
 
-    // curl_setopt($br, CURLOPT_RETURNTRANSFER, true);
-    // $data = json_decode(curl_exec($br));
-    // curl_close($br);
-}
+$('#submit').click(()=>{
+    SaveLabelledTweet(_tweet);
+    $.cookie('lastLabelledTweet', _tweet['id'], { expires: 365 });
+    NewTweet();
+});
 
-//RetrieveTweet(token,'depression');
+$('#next').click(()=>{
+    $.cookie('lastLabelledTweet', _tweet['id'], { expires: 365 });
+    NewTweet();
+});
 
-var db = firebase.firestore();
+$('#projectButton').click(()=>{
+    $('#projectModal').show();
+});
 
-console.log(id + ' - ' + text);
-
-function AddTweet(text,note){
-    db.collection("tweets").add({
-        text: text,
-        note: note,
-    })
-    .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-    })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
-}
-
-// function GetTweet(){
-//     db.collection("tweets").get().then((querySnapshot) => {
-//         querySnapshot.forEach((doc) => {
-//             console.log(`${doc.id} => ${doc.data()}`);
-//         });
-//     });
-// }
-
-// AddTweet('test',10);
-// GetTweet();
+$('.modal').click(()=>{
+    $('#projectModal').hide();
+});
