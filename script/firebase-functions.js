@@ -1,5 +1,10 @@
 function SaveUnlabelledTweet(id, text, username, time, embedding){
-    db.collection('unlabelledTweets').doc(id).set( { text: text, username: username, time: time, embedding: embedding} );
+    db.collection('unlabelledTweets').doc(id).get().then(snap => {
+        if(!snap.exists){
+            db.collection('unlabelledTweets').doc(id).set( { text: text, username: username, time: time, embedding: embedding} );
+            console.log(id);
+        }
+    });
 }
 
 function DisplayTweet(){
@@ -18,9 +23,9 @@ function NewTweet(){
             DisplayTweet();
         });
     });
-    $('input[type=checkbox]').each(function () {
-        $(this).prop('checked', false);
-        $(this).prop('disabled', false);
+    $('.mood-button').each(function() {
+        $(this).removeClass('disabled');
+        $(this).removeClass('checked');
     });
 }
 
@@ -30,33 +35,51 @@ function SaveLabelledTweet(tweet){
         text: tweet['text'],
         username: tweet['username'],
         time: tweet['time'],
-        neutre: $('#neutre').is(':checked'),
-        suicidaire: $('#suicidaire').is(':checked'),
-        démotivé: $('#démotivé').is(':checked'),
-        mélancolique: $('#mélancolique').is(':checked'),
-        anxieux: $('#anxieux').is(':checked'),
-        nostalgique: $('#nostalgique').is(':checked'),
-        désespéré: $('#désespéré').is(':checked'),
-        pessimiste: $('#pessimiste').is(':checked'),
-        dévalorisé: $('#dévalorisé').is(':checked'),
-        tristesse: $('#triste').is(':checked'),
-        fatigué: $('#fatigué').is(':checked'),
-        inutilité: $('#inutilité').is(':checked'),
-        culpabilité: $('#culpabilité').is(':checked'),
-        motivé: $('#motivé').is(':checked'),
-        optimiste: $('#optimiste').is(':checked'),
-        joyeux: $('#joyeux').is(':checked'),
-        confiant: $('#confiant').is(':checked'),
-        enthousiaste: $('#enthousiaste').is(':checked'),
+        neutre: $('#neutre').hasClass('checked'),
+        suicidaire: $('#suicidaire').hasClass('checked'),
+        démotivé: $('#démotivé').hasClass('checked'),
+        mélancolique: $('#mélancolique').hasClass('checked'),
+        anxieux: $('#anxieux').hasClass('checked'),
+        nostalgique: $('#nostalgique').hasClass('checked'),
+        désespéré: $('#désespéré').hasClass('checked'),
+        pessimiste: $('#pessimiste').hasClass('checked'),
+        dévalorisé: $('#dévalorisé').hasClass('checked'),
+        tristesse: $('#triste').hasClass('checked'),
+        fatigué: $('#fatigué').hasClass('checked'),
+        inutilité: $('#inutilité').hasClass('checked'),
+        culpabilité: $('#culpabilité').hasClass('checked'),
+        motivé: $('#motivé').hasClass('checked'),
+        optimiste: $('#optimiste').hasClass('checked'),
+        joyeux: $('#joyeux').hasClass('checked'),
+        confiant: $('#confiant').hasClass('checked'),
+        enthousiaste: $('#enthousiaste').hasClass('checked'),
     })
     .then(function() {
-        db.collection('labelledTweets').doc('00000000').get().then(function(document) {
-            db.collection('labelledTweets').doc('00000000').set({
-                counter: document.data()['counter']+1,
-            });
-        });
+        ChangeCounter('labelled',1);
         $.cookie('lastLabelledTweet', tweet['id'], { expires: 365 });
+
+        if(Math.random()>0.9){
+            db.collection('labelledTweets').doc(tweet['id']).get().then(function(document) {
+                document.ref.delete();
+            });
+            ChangeCounter('unlabelled',-1);
+        }
         NewTweet();
     });
 }
 
+function ChangeCounter(counter, n){
+    db.collection('counters').doc(counter).get().then(function(document) {
+        db.collection('counters').doc(counter).set({
+            counter: document.data()['counter'] + n,
+        });
+    });
+}
+
+function UpdateCounter(){
+    db.collection('unlabelledTweets').get().then(snap => {
+        db.collection('counters').doc('unlabelled').set({
+            counter: snap.size,
+        });
+    });
+}

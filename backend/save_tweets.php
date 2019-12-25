@@ -1,12 +1,12 @@
-<script src="script/firebase-app.js"></script>
-<script src="script/firebase-auth.js"></script>
-<script src="script/firebase-firestore.js"></script>
-<script src="script/firebase-config.js"></script>
-<script src="script/firebase-functions.js"></script>
+<script src="../script/firebase-app.js"></script>
+<script src="../script/firebase-auth.js"></script>
+<script src="../script/firebase-firestore.js"></script>
+<script src="../script/firebase-config.js"></script>
+<script src="../script/firebase-functions.js"></script>
 
 <?php
 
-    include('token.php');
+    include('./token.php');
 
     function SaveUnlabelledTweet($token, $search_word, $n){
         $api_endpoint = 'https://api.twitter.com/1.1/search/tweets.json?q='.$search_word.'&lang=fr&count='.$n.'&tweet_mode=extended&include_entities=false';
@@ -36,6 +36,24 @@
             }
         }
     }
+
+    function MorningRoutine($token){
+        SaveUnlabelledTweet($token, 'depression', 50);
+        SaveUnlabelledTweet($token, 'suicide', 50);
+        SaveUnlabelledTweet($token, 'bad%20mood', 50);
+        SaveUnlabelledTweet($token, 'bad%20triste', 50);
+        ?><script>UpdateCounter();</script><?php
+    }
+
+    MorningRoutine($token);
     
-    SaveUnlabelledTweet($token, 'depression', 20);
 ?>
+
+<script>
+    db.collection('unlabelledTweets').get().then(snap => {
+        console.log(snap.size);
+    });
+    db.collection('labelledTweets').get().then(snap => {
+        console.log(snap.size);
+    });
+</script>

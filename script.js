@@ -1,18 +1,34 @@
 var _tweet;
 NewTweet();
 
-db.collection('labelledTweets').doc('00000000').onSnapshot(function(document) {
+db.collection('counters').doc('labelled').onSnapshot(function(document) {
     $('#compteur').html('<b>'+document.data()['counter']+'</b> tweets analysés');
 });
 
-$('#neutre').change(()=>{
-    $('input[type=checkbox]').each(function () {
-        $(this).prop('disabled', $('#neutre').is(':checked'));
-        if($(this)[0].id!='neutre' && $('#neutre').is(':checked')){
-            $(this).prop('checked', false);
+$('.mood-button').click((e)=>{
+    if($(e.target).hasClass('checked')){
+        $(e.target).removeClass('checked');
+    }
+    else{
+        if(!$('#neutre').hasClass('checked')){
+            $(e.target).addClass('checked');
+        }
+    }
+});
+
+$('#neutre').click(()=>{
+    $('.mood-button').each(function () {
+        if($('#neutre').hasClass('checked')){
+            $(this).addClass('disabled');
+        }
+        else{
+            $(this).removeClass('disabled');
+        }
+        if($(this)[0].id!='neutre' && $('#neutre').hasClass('checked')){
+            $(this).removeClass('checked');
         }
     });
-    $('#neutre').prop('disabled',false);
+    $('#neutre').removeClass('disabled');
 });
 
 $('#submit').click(()=>{

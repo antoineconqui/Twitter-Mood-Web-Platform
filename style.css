@@ -52,12 +52,7 @@ twitter-widget{
     margin-top: 10px;
 }
 
-input {
-    position: absolute;
-    left: -9999px;
-}
-  
-label {
+.mood-button {
     text-align: center;
     width: 100%;
     position: relative;
@@ -72,11 +67,11 @@ label {
     cursor: pointer;
 }
 
-input:checked + label, label:hover{
+.mood-button.checked{
     background-color: var(--dark);
 }
 
-input:disabled + label {
+.mood-button.disabled{
     background-color: var(--light);
 }
 
@@ -101,6 +96,7 @@ input:disabled + label {
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+    text-align: justify;
 }
 
 .modal-content h3{
