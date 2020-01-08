@@ -82,4 +82,9 @@ function UpdateCounter(){
             counter: snap.size,
         });
     });
+    db.collection('labelledTweets').get().then(snap => {
+        db.collection('counters').doc('labelled').set({
+            counter: snap.size,
+        });
+    });
 }

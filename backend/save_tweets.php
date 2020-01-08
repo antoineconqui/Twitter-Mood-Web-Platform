@@ -41,7 +41,7 @@
         SaveUnlabelledTweet($token, 'depression', 50);
         SaveUnlabelledTweet($token, 'suicide', 50);
         SaveUnlabelledTweet($token, 'bad%20mood', 50);
-        SaveUnlabelledTweet($token, 'bad%20triste', 50);
+        SaveUnlabelledTweet($token, 'mood%20triste', 50);
         ?><script>UpdateCounter();</script><?php
     }
 
